@@ -50,14 +50,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (v == buttonSubmit){
 
             String createBirdName = editTextBird.getText().toString();
+
             Integer createZipCode = Integer.parseInt(editTextZipCode.getText().toString());
+
             String createName = editTextName.getText().toString();
 
-            BirdSighting createBirdSighting =new BirdSighting(createBirdName, createZipCode, createName);
+            BirdSighting createBirdSighting = new BirdSighting(createBirdName, createZipCode, createName);
 
             myRef.push().setValue(createBirdSighting);
-
-
 
         }
 

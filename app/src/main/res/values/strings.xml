@@ -13,5 +13,13 @@
 
     <string name="buttonsubmit">Submit</string>
 
+    <string name="zipcodesearchhint">Enter Zip Code</string>
+
+    <string name="searchbutton">Search</string>
+
+    <string name="birdnameresult">Bird Name</string>
+
+    <string name="personnameresult">Bird Finder</string>
+
 
 </resources>
