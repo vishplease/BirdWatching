@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">Bird Watching</string>
+
+    <string name="report">Report</string>
+
+    <string name="search">Search</string>
+
+    <string name="birdnamehint">Enter Bird Name</string>
+
+    <string name="zipcodehint">Enter Zip Code</string>
+
+    <string name="namehint">Enter Your Name</string>
+
+    <string name="buttonsubmit">Submit</string>
+
+
+</resources>
