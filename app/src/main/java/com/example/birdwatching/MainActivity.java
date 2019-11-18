@@ -13,6 +13,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -38,7 +44,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View v) {
 
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        final DatabaseReference myRef = database.getReference("birdsightings");
+
         if (v == buttonSubmit){
+
+            String createBirdName = editTextBird.getText().toString();
+            Integer createZipCode = Integer.parseInt(editTextZipCode.getText().toString());
+            String createName = editTextName.getText().toString();
+
+            BirdSighting createBirdSighting =new BirdSighting(createBirdName, createZipCode, createName);
+
+            myRef.push().setValue(createBirdSighting);
+
 
 
         }
