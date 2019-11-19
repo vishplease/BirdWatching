@@ -49,15 +49,33 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         if (v == buttonSubmit){
 
-            String createBirdName = editTextBird.getText().toString();
+            if (editTextBird.getText().toString().trim().equalsIgnoreCase("")) {
+                editTextBird.setError("This field can not be blank");
+            } else if(editTextName.getText().toString().trim().equalsIgnoreCase("")) {
+                editTextName.setError("This field can not be blank");
+            } else if(editTextName.getText().toString().trim().equalsIgnoreCase("")) {
+                editTextName.setError("This field can not be blank");
+            }   else {
 
-            Integer createZipCode = Integer.parseInt(editTextZipCode.getText().toString());
+                String createBirdName = editTextBird.getText().toString();
+                String createName = editTextName.getText().toString();
 
-            String createName = editTextName.getText().toString();
 
-            BirdSighting createBirdSighting = new BirdSighting(createBirdName, createZipCode, createName);
+                Integer createZipCode = 48104;
 
-            myRef.push().setValue(createBirdSighting);
+                try {
+                    createZipCode = Integer.parseInt(editTextZipCode.getText().toString());
+                } catch(Exception e) {
+
+                    editTextZipCode.setError("Enter Numeric Values Only");
+                    return;
+                }
+
+                BirdSighting createBirdSighting = new BirdSighting(createBirdName, createZipCode, createName);
+
+                myRef.push().setValue(createBirdSighting);
+
+            }
 
         }
 
