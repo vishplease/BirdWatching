@@ -73,7 +73,7 @@ public class Search extends AppCompatActivity implements View.OnClickListener{
         final DatabaseReference myRef = database.getReference("birdsightings");
 
         if (v == buttonZipSearch) {
-            //get text from editText
+
 
             Integer newZipSearch = Integer.parseInt(editTextZipSearch.getText().toString());
 
@@ -119,4 +119,6 @@ public class Search extends AppCompatActivity implements View.OnClickListener{
 
 
     }
+
+
 }
