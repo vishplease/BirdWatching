@@ -104,7 +104,7 @@ public class Search extends AppCompatActivity implements View.OnClickListener{
 
                 Integer newZipSearch = Integer.parseInt(editTextZipSearch.getText().toString());
 
-                myRef.orderByChild("zipCode").equalTo(newZipSearch).addChildEventListener(new ChildEventListener() {
+                myRef.orderByChild("zipCode").equalTo(newZipSearch).limitToLast(1).addChildEventListener(new ChildEventListener() {
                     @Override
                     public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
 
@@ -157,24 +157,20 @@ public class Search extends AppCompatActivity implements View.OnClickListener{
 
                 Integer newZipSearch = Integer.parseInt(editTextZipSearch.getText().toString());
 
-                myRef.orderByChild("zipCode").equalTo(newZipSearch).addChildEventListener(new ChildEventListener() {
+                myRef.orderByChild("zipCode").equalTo(newZipSearch).limitToLast(1).addChildEventListener(new ChildEventListener() {
                     @Override
                     public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
 
                         String editKey = dataSnapshot.getKey();
 
                         BirdSighting foundSighting = dataSnapshot.getValue(BirdSighting.class);
-                        String findBirdName = foundSighting.birdName;
-                        String findPersonName = foundSighting.personName;
-                        Integer findZipCode = foundSighting.zipCode;
+
                         Integer editImportance = foundSighting.sightingImportance + 1;
 
-                        BirdSighting editBirdSighting = new BirdSighting(findBirdName,
-                                findPersonName,
-                                findZipCode,
-                                editImportance);
 
-                        myRef.child(editKey).setValue(editBirdSighting);
+
+
+                        myRef.child(editKey).child("sightingImportance").setValue(editImportance);
 
                         Toast.makeText(Search.this, "Importance level set to: "+editImportance, Toast.LENGTH_SHORT).show();
 
