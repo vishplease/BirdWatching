@@ -11,20 +11,23 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.ChildEventListener;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.auth.FirebaseUser;
 
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
+    private FirebaseAuth mAuth;
+
+    TextView textViewBirdName, textViewUserEmail, textViewZipCode;
     EditText editTextBird, editTextZipCode, editTextName;
     Button buttonSubmit;
+    public FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,12 +35,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
         this.setTitle("Report Sighting");
 
+        textViewBirdName = findViewById(R.id.textViewBirdName1);
+        textViewUserEmail = findViewById(R.id.textViewUserEmail);
+        textViewZipCode = findViewById(R.id.textViewZipCode);
         editTextBird = findViewById(R.id.editTextBird);
         editTextZipCode = findViewById(R.id.editTextZipCode);
         editTextName = findViewById(R.id.editTextName);
+        editTextName.setText(currentUser.getEmail());
         buttonSubmit = findViewById(R.id.buttonSubmit);
 
         buttonSubmit.setOnClickListener(this);
+
+
+        mAuth = FirebaseAuth.getInstance();
+
     }
 
 
@@ -52,17 +63,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             if (editTextBird.getText().toString().trim().equalsIgnoreCase("")) {
                 editTextBird.setError("This field can not be blank");
-            } else if(editTextName.getText().toString().trim().equalsIgnoreCase("")) {
-                editTextName.setError("This field can not be blank");
-            } else if(editTextName.getText().toString().trim().equalsIgnoreCase("")) {
+            }  else if(editTextZipCode.getText().toString().trim().equalsIgnoreCase("")) {
                 editTextName.setError("This field can not be blank");
             }   else {
-
                 String createBirdName = editTextBird.getText().toString();
-                String createName = editTextName.getText().toString();
-
-
-                Integer createZipCode = 48104;
+                String createPersonName = currentUser.getEmail();
+                Integer createZipCode;
+                Integer createSightingImportance = 0;
 
                 try {
                     createZipCode = Integer.parseInt(editTextZipCode.getText().toString());
@@ -72,9 +79,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     return;
                 }
 
-                BirdSighting createBirdSighting = new BirdSighting(createBirdName, createZipCode, createName);
+                BirdSighting createBirdSighting = new BirdSighting(createBirdName, createPersonName, createZipCode, createSightingImportance);
 
                 myRef.push().setValue(createBirdSighting);
+
+                Toast.makeText(this, "Bird sighting successfully added to database", Toast.LENGTH_SHORT).show();
 
             }
 
@@ -105,7 +114,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         } else if (item.getItemId() == R.id.itemLogOut) {
 
             FirebaseAuth.getInstance().signOut();
-
+            Toast.makeText(this, "Log out successful", Toast.LENGTH_LONG).show();
             Intent intent = new Intent(MainActivity.this, LoginActivity.class);
             startActivity(intent);
 

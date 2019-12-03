@@ -65,6 +65,7 @@ public class Search extends AppCompatActivity implements View.OnClickListener{
         } else if (item.getItemId() == R.id.itemLogOut) {
 
             FirebaseAuth.getInstance().signOut();
+            Toast.makeText(this, "Sign out successful", Toast.LENGTH_LONG).show();
 
             Intent intent = new Intent(Search.this, LoginActivity.class);
             startActivity(intent);

@@ -2,53 +2,90 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/textViewBirdName"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <EditText
-        android:id="@+id/editTextZipCode"
+    <TextView
+        android:id="@+id/textViewUserEmail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="25dp"
+        android:text="@string/useremail"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/textViewBirdName1"
+        app:layout_constraintTop_toBottomOf="@+id/textViewBirdName1" />
+
+    <TextView
+        android:id="@+id/textViewZipCode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:text="@string/zipcode"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/textViewUserEmail"
+        app:layout_constraintTop_toBottomOf="@+id/textViewUserEmail" />
+
+    <EditText
+        android:id="@+id/editTextBird"
+        android:layout_width="167dp"
+        android:layout_height="41dp"
+        android:ems="10"
+        android:hint="@string/birdnamehint"
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewBirdName1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textViewBirdName1"
+        app:layout_constraintTop_toTopOf="@+id/textViewBirdName1" />
+
+    <EditText
+        android:id="@+id/editTextZipCode"
+        android:layout_width="167dp"
+        android:layout_height="41dp"
         android:ems="10"
         android:hint="@string/zipcodehint"
         android:inputType="textPersonName"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewZipCode"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextBird" />
+        app:layout_constraintStart_toEndOf="@+id/textViewZipCode"
+        app:layout_constraintTop_toTopOf="@+id/textViewZipCode" />
 
     <EditText
         android:id="@+id/editTextName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
+        android:layout_width="167dp"
+        android:layout_height="41dp"
         android:ems="10"
-        android:hint="@string/namehint"
+        android:focusable="false"
         android:inputType="textPersonName"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewUserEmail"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextZipCode" />
+        app:layout_constraintStart_toEndOf="@+id/textViewUserEmail"
+        app:layout_constraintTop_toTopOf="@+id/textViewUserEmail" />
 
     <Button
         android:id="@+id/buttonSubmit"
         android:layout_width="210dp"
         android:layout_height="50dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="25dp"
         android:text="@string/buttonsubmit"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextName" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewZipCode" />
 
-    <EditText
-        android:id="@+id/editTextBird"
+
+    <TextView
+        android:id="@+id/textViewBirdName1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
         android:layout_marginTop="100dp"
-        android:ems="10"
-        android:hint="@string/birdnamehint"
-        android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:text="@string/birdname"
+        android:textSize="24sp"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -7,7 +7,13 @@
 
     <string name="logout">Log Out</string>
 
+    <string name="birdname">Bird Name:</string>
+
+    <string name="useremail">User Email:</string>
+
     <string name="birdnamehint">Enter Bird Name</string>
+
+    <string name="zipcode">Zip Code:</string>
 
     <string name="zipcodehint">Enter Zip Code</string>
 
@@ -23,7 +29,7 @@
 
     <string name="personnameresult">Bird Finder</string>
 
-    <string name="loginmessage">Please log in to continue.</string>
+    <string name="loginmessage">Please register and/or log in to continue.</string>
 
     <string name="emailhint">Enter Email</string>
 

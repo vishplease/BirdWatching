@@ -54,6 +54,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         // Check if user is signed in already signed in and take him to Portal Activity directly.
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
         if(currentUser != null) {
+            String userName = currentUser.getEmail();
+            Toast.makeText(this, "Logged in as "+userName, Toast.LENGTH_LONG).show();
+
             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
             startActivity(intent);
         }
