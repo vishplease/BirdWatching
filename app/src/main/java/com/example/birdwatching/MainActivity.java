@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -29,7 +30,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        this.setTitle("Report");
+        this.setTitle("Report Sighting");
 
         editTextBird = findViewById(R.id.editTextBird);
         editTextZipCode = findViewById(R.id.editTextZipCode);
@@ -101,7 +102,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             Intent itemSearchIntent = new Intent(this, Search.class);
             startActivity(itemSearchIntent);
+        } else if (item.getItemId() == R.id.itemLogOut) {
+
+            FirebaseAuth.getInstance().signOut();
+
+            Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+            startActivity(intent);
+
+
         }
+
+
         return super.onOptionsItemSelected(item);
     }
 }

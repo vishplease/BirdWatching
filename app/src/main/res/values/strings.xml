@@ -5,6 +5,8 @@
 
     <string name="search">Search</string>
 
+    <string name="logout">Log Out</string>
+
     <string name="birdnamehint">Enter Bird Name</string>
 
     <string name="zipcodehint">Enter Zip Code</string>
