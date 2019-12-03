@@ -89,46 +89,56 @@ public class Search extends AppCompatActivity implements View.OnClickListener{
         final DatabaseReference myRef = database.getReference("birdsightings");
 
         if (v == buttonZipSearch) {
+            if (editTextZipSearch.getText().toString().trim().equalsIgnoreCase("")) {
+                editTextZipSearch.setError("This field cannot be blank");
+            } else {
+                try {
+                    Integer zipTest = Integer.parseInt(editTextZipSearch.getText().toString());
 
-
-            Integer newZipSearch = Integer.parseInt(editTextZipSearch.getText().toString());
-
-            myRef.orderByChild("zipCode").equalTo(newZipSearch).addChildEventListener(new ChildEventListener() {
-                @Override
-                public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-
-                    BirdSighting foundSighting = dataSnapshot.getValue(BirdSighting.class);
-
-                    String findName = foundSighting.personName;
-                    String findBird = foundSighting.birdName;
-
-
-                    textViewPersonNameResult.setText(findName);
-                    textViewBirdNameResult.setText(findBird);
-
+                } catch (Exception e) {
+                    editTextZipSearch.setError("Enter Numerical Value");
+                    return;
 
                 }
 
-                @Override
-                public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
 
-                }
+                Integer newZipSearch = Integer.parseInt(editTextZipSearch.getText().toString());
 
-                @Override
-                public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
+                myRef.orderByChild("zipCode").equalTo(newZipSearch).addChildEventListener(new ChildEventListener() {
+                    @Override
+                    public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
 
-                }
+                        BirdSighting foundSighting = dataSnapshot.getValue(BirdSighting.class);
 
-                @Override
-                public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                        String findName = foundSighting.personName;
+                        String findBird = foundSighting.birdName;
 
-                }
 
-                @Override
-                public void onCancelled(@NonNull DatabaseError databaseError) {
+                        textViewPersonNameResult.setText(findName);
+                        textViewBirdNameResult.setText(findBird);
+                    }
 
-                }
-            });
+                    @Override
+                    public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+                    }
+
+                    @Override
+                    public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
+
+                    }
+
+                    @Override
+                    public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
+            }
 
 
         } else if (v == buttonAddImportance) {
@@ -151,9 +161,24 @@ public class Search extends AppCompatActivity implements View.OnClickListener{
                     @Override
                     public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
 
+                        String editKey = dataSnapshot.getKey();
+
                         BirdSighting foundSighting = dataSnapshot.getValue(BirdSighting.class);
-                        Integer findImportance = foundSighting.sightingImportance;
-                        findImportance = findImportance + 1;
+                        String findBirdName = foundSighting.birdName;
+                        String findPersonName = foundSighting.personName;
+                        Integer findZipCode = foundSighting.zipCode;
+                        Integer editImportance = foundSighting.sightingImportance + 1;
+
+                        BirdSighting editBirdSighting = new BirdSighting(findBirdName,
+                                findPersonName,
+                                findZipCode,
+                                editImportance);
+
+                        myRef.child(editKey).setValue(editBirdSighting);
+
+                        Toast.makeText(Search.this, "Importance level set to: "+editImportance, Toast.LENGTH_SHORT).show();
+
+                        //Toast.makeText(Search.this, "EditKey is "+editKey, Toast.LENGTH_SHORT).show();
 
 
                     }
