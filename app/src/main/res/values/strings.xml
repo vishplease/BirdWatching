@@ -21,5 +21,15 @@
 
     <string name="personnameresult">Bird Finder</string>
 
+    <string name="loginmessage">Please log in to continue.</string>
+
+    <string name="emailhint">Enter Email</string>
+
+    <string name="passwordhint">Enter Password</string>
+
+    <string name="registerbutton">Register Account</string>
+
+    <string name="loginbutton">Log In</string>
+
 
 </resources>
