@@ -25,8 +25,9 @@ import com.google.firebase.database.FirebaseDatabase;
 public class Search extends AppCompatActivity implements View.OnClickListener{
 
     EditText editTextZipSearch;
-    Button buttonZipSearch;
+    Button buttonZipSearch, buttonAddImportance;
     TextView textViewBirdNameResult, textViewPersonNameResult;
+    Integer importanceResult;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,10 +37,12 @@ public class Search extends AppCompatActivity implements View.OnClickListener{
 
         editTextZipSearch = findViewById(R.id.editTextZipSearch);
         buttonZipSearch = findViewById(R.id.buttonZipSearch);
+        buttonAddImportance = findViewById(R.id.buttonAddImportance);
         textViewBirdNameResult = findViewById(R.id.textViewBirdNameResult);
         textViewPersonNameResult = findViewById(R.id.textViewPersonNameResult);
 
         buttonZipSearch.setOnClickListener(this);
+        buttonAddImportance.setOnClickListener(this);
 
     }
 
@@ -56,12 +59,14 @@ public class Search extends AppCompatActivity implements View.OnClickListener{
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
 
         if(item.getItemId() == R.id.itemReport) {
-            Toast.makeText(this, "You are already on the Report page", Toast.LENGTH_SHORT).show();
+
+            Intent itemSearchIntent = new Intent(this, MainActivity.class);
+            startActivity(itemSearchIntent);
 
         } else if (item.getItemId() == R.id.itemSearch){
 
-            Intent itemSearchIntent = new Intent(this, Search.class);
-            startActivity(itemSearchIntent);
+            Toast.makeText(this, "You are already on the Search page", Toast.LENGTH_SHORT).show();
+
         } else if (item.getItemId() == R.id.itemLogOut) {
 
             FirebaseAuth.getInstance().signOut();
@@ -97,8 +102,10 @@ public class Search extends AppCompatActivity implements View.OnClickListener{
                     String findName = foundSighting.personName;
                     String findBird = foundSighting.birdName;
 
+
                     textViewPersonNameResult.setText(findName);
                     textViewBirdNameResult.setText(findBird);
+
 
                 }
 
@@ -124,7 +131,54 @@ public class Search extends AppCompatActivity implements View.OnClickListener{
             });
 
 
+        } else if (v == buttonAddImportance) {
 
+            if (editTextZipSearch.getText().toString().trim().equalsIgnoreCase("")) {
+                editTextZipSearch.setError("This field cannot be blank");
+            } else {
+
+                try {
+                    Integer zipTest = Integer.parseInt(editTextZipSearch.getText().toString());
+
+                } catch (Exception e) {
+                    editTextZipSearch.setError("Enter Numerical Value");
+                    return;
+                }
+
+                Integer newZipSearch = Integer.parseInt(editTextZipSearch.getText().toString());
+
+                myRef.orderByChild("zipCode").equalTo(newZipSearch).addChildEventListener(new ChildEventListener() {
+                    @Override
+                    public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+                        BirdSighting foundSighting = dataSnapshot.getValue(BirdSighting.class);
+                        Integer findImportance = foundSighting.sightingImportance;
+                        findImportance = findImportance + 1;
+
+
+                    }
+
+                    @Override
+                    public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+                    }
+
+                    @Override
+                    public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
+
+                    }
+
+                    @Override
+                    public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
+            }
 
         }
 

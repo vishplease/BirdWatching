@@ -39,5 +39,7 @@
 
     <string name="loginbutton">Log In</string>
 
+    <string name="addimportance">Add Importance</string>
+
 
 </resources>
