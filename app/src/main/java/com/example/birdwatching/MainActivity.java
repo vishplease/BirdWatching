@@ -111,6 +111,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             Intent itemSearchIntent = new Intent(this, Search.class);
             startActivity(itemSearchIntent);
+
         } else if (item.getItemId() == R.id.itemLogOut) {
 
             FirebaseAuth.getInstance().signOut();
@@ -119,6 +120,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             startActivity(intent);
 
 
+        } else if (item.getItemId() == R.id.itemImportance) {
+            Intent intent = new Intent(this, ImportanceActivity.class);
+            startActivity(intent);
         }
 
 

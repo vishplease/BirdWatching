@@ -41,5 +41,10 @@
 
     <string name="addimportance">Add Importance</string>
 
+    <string name="importanceheader">The most important bird sighting is</string>
+
+    <string name="importancemenu">Most Important Sighting</string>
+
+
 
 </resources>

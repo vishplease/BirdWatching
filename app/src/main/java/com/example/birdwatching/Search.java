@@ -74,9 +74,11 @@ public class Search extends AppCompatActivity implements View.OnClickListener{
 
             Intent intent = new Intent(Search.this, LoginActivity.class);
             startActivity(intent);
-
-
+        } else if (item.getItemId() == R.id.itemImportance) {
+            Intent intent = new Intent(this, ImportanceActivity.class);
+            startActivity(intent);
         }
+
 
 
         return super.onOptionsItemSelected(item);
@@ -90,7 +92,7 @@ public class Search extends AppCompatActivity implements View.OnClickListener{
 
         if (v == buttonZipSearch) {
             if (editTextZipSearch.getText().toString().trim().equalsIgnoreCase("")) {
-                editTextZipSearch.setError("This field cannot be blank");
+                editTextZipSearch.setError("Zip code is empty. This field cannot be blank.");
             } else {
                 try {
                     Integer zipTest = Integer.parseInt(editTextZipSearch.getText().toString());
@@ -166,9 +168,6 @@ public class Search extends AppCompatActivity implements View.OnClickListener{
                         BirdSighting foundSighting = dataSnapshot.getValue(BirdSighting.class);
 
                         Integer editImportance = foundSighting.sightingImportance + 1;
-
-
-
 
                         myRef.child(editKey).child("sightingImportance").setValue(editImportance);
 

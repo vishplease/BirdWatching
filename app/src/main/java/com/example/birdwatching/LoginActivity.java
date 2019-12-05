@@ -57,7 +57,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             String userName = currentUser.getEmail();
             Toast.makeText(this, "Logged in as "+userName, Toast.LENGTH_LONG).show();
 
-            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+            Intent intent = new Intent(LoginActivity.this, ImportanceActivity.class);
             startActivity(intent);
         }
     }
@@ -116,7 +116,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         if (task.isSuccessful()) {
                             // Take user to Upcoming Trips Activity when login is successful
                             loginSuccess();
-                            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                            Intent intent = new Intent(LoginActivity.this, ImportanceActivity.class);
                             startActivity(intent);
                         } else {
                             // If sign in fails, display a message to the user.
